@@ -41,3 +41,46 @@ const peliculasAgrupadas = agruparPeliculasPorGenero(peliculasDePrueba);
 console.log(peliculasAgrupadas); 
 
 
+async function obtenerTitulosDePosts(): Promise<string[]> {
+    try{
+        type Post = {
+            userId: number;
+            id: number;
+            title: string;
+            body: string;
+        }
+        
+        const response = await fetch('https://jsonplaceholder.typicode.com/posts');
+
+        if(!response.ok){
+            throw new Error(`Error HTTP: ${response.status}`);
+        }
+
+        const posts:Post[] = await response.json();
+        const titulos: string[] = posts.map(posts => posts.title);
+        return titulos;
+    }
+    catch(error){
+        console.error(`Error al obtener los títulos (con async/await): ${error}`);
+        return [];
+    }
+}
+
+obtenerTitulosDePosts()
+    .then(titulos => {
+        console.log(`Títulos de los posts: ${titulos}`);
+    })
+    .catch(error => {
+        console.error(`Error al obtener los títulos: ${error}`);
+    });
+
+async function ejecutarObtenerTitulos() {
+    try {
+        const titulos = await obtenerTitulosDePosts();
+        console.log(`Títulos de los posts (con async/await): ${titulos}`);
+    } catch (error) {
+    console.error(`Error al obtener los títulos (con async/await): ${error}`);
+    }
+}
+
+ejecutarObtenerTitulos();
