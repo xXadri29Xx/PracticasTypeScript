@@ -21,6 +21,10 @@
   },
   "dependencies": {
     "@types/axios": "^0.9.36",
-    "axios": "^1.12.2"
+    "@types/cors": "^2.8.19",
+    "@types/express": "^5.0.5",
+    "axios": "^1.12.2",
+    "cors": "^2.8.5",
+    "express": "^5.1.0"
   }
 }
